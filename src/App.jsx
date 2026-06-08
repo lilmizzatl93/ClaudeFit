@@ -19,11 +19,56 @@ function App() {
       </nav>
 
       <main className="app-main">
-        {screen === 'morning' && <div><h2>Morning check-in</h2><p>Coming soon...</p></div>}
+        {screen === 'morning' && <Morning />}
         {screen === 'evening' && <div><h2>Evening wind-down</h2><p>Coming soon...</p></div>}
         {screen === 'dashboard' && <div><h2>Dashboard</h2><p>Coming soon...</p></div>}
         {screen === 'insights' && <div><h2>Insights</h2><p>Coming soon...</p></div>}
       </main>
+    </div>
+  )
+}
+
+function Morning() {
+  const [energy, setEnergy] = useState(null)
+  const [clothes, setClothes] = useState([])
+  const [movement, setMovement] = useState([])
+
+  const toggleTag = (list, setList, val) => {
+    setList(list.includes(val) ? list.filter(t => t !== val) : [...list, val])
+  }
+
+  return (
+    <div>
+      <h2>Morning check-in</h2>
+
+      <div className="section">
+        <p className="section-label">Energy level</p>
+        <div className="scale-row">
+          {[1,2,3,4,5].map(n => (
+            <button key={n} className={energy === n ? 'scale-btn active' : 'scale-btn'} onClick={() => setEnergy(n)}>{n}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <p className="section-label">How do your clothes feel?</p>
+        <div className="tag-row">
+          {['just right','slightly tight','tight','loose','bloated'].map(t => (
+            <button key={t} className={clothes.includes(t) ? 'tag active' : 'tag'} onClick={() => toggleTag(clothes, setClothes, t)}>{t}</button>
+          ))}
+        </div>
+      </div>
+
+      <div className="section">
+        <p className="section-label">How does movement feel?</p>
+        <div className="tag-row">
+          {['fluid','strong','heavy','light','stiff','achy'].map(t => (
+            <button key={t} className={movement.includes(t) ? 'tag active' : 'tag'} onClick={() => toggleTag(movement, setMovement, t)}>{t}</button>
+          ))}
+        </div>
+      </div>
+
+      <button className="submit-btn">Save morning check-in</button>
     </div>
   )
 }
