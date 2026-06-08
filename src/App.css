@@ -144,3 +144,15 @@ cursor: pointer;
   font-family: inherit;
   margin-top: 1rem;
 }
+.pain-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.pain-slider input {
+  flex: 1;
+  accent-color: #E24B4A;
+}

@@ -32,6 +32,8 @@ function Morning() {
   const [energy, setEnergy] = useState(null)
   const [clothes, setClothes] = useState([])
   const [movement, setMovement] = useState([])
+  const [pain, setPain] = useState([])
+  const [painLevels, setPainLevels] = useState({})
 
   const toggleTag = (list, setList, val) => {
     setList(list.includes(val) ? list.filter(t => t !== val) : [...list, val])
@@ -66,6 +68,24 @@ function Morning() {
             <button key={t} className={movement.includes(t) ? 'tag active' : 'tag'} onClick={() => toggleTag(movement, setMovement, t)}>{t}</button>
           ))}
         </div>
+      </div>
+
+      <div className="section">
+        <p className="section-label">Any pain today?</p>
+        <div className="tag-row">
+          {['none','hip','back','neck','glutes','legs','general'].map(t => (
+            <button key={t} className={pain.includes(t) ? 'tag active' : 'tag'}
+              onClick={() => toggleTag(pain, setPain, t)}>{t}</button>
+          ))}
+        </div>
+        {pain.filter(p => p !== 'none').map(area => (
+          <div key={area} className="pain-slider">
+            <span>{area}</span>
+            <input type="range" min="1" max="10" defaultValue="5"
+              onChange={e => setPainLevels({...painLevels, [area]: e.target.value})}/>
+            <span>{painLevels[area] || 5}/10</span>
+          </div>
+        ))}
       </div>
 
       <button className="submit-btn">Save morning check-in</button>
