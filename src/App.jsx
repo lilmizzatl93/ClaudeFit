@@ -71,7 +71,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>ClaudeFit</h1>
+        <h1>FitBud</h1>
         <p className="app-date">{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
       </header>
       <nav className="app-nav">
